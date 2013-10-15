@@ -1,0 +1,206 @@
+%% Dokumenteinstellungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,oneside,12pt,ngerman]{scrartcl}
+
+%% Deutsche Anpassungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}
+\usepackage{lmodern} %Type1-Schriftart für nicht-englische Texte
+\usepackage{booktabs}	% schönere tabellen
+
+%% Packages für Grafiken & Abbildungen %%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%Zum Laden von Grafiken
+%\usepackage{subfig} %%Teilabbildungen in einer Abbildung
+%\usepackage{tikz} %%Vektorgrafiken aus LaTeX heraus erstellen
+
+
+%% Packages für Formeln %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+
+%% Andere Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{a4wide} %%Kleinere Seitenränder = mehr Text pro Zeile.
+\usepackage{fancyhdr} %%Fancy Kopf- und Fußzeilen
+%\usepackage{longtable} %%Für Tabellen, die eine Seite überschreiten
+\usepackage{lastpage}
+\usepackage[raggedright]{subfigure}
+\usepackage[final]{pdfpages}
+\includepdfset{pages=-,noautoscale}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TODO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Optionen / Modifikationen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{Einstellungen}
+
+% Formeln römisch nummerieren
+\renewcommand{\theequation}{\Roman{equation}} 
+
+% "Formel" statt "Gleichung"
+\def\equationname{Formel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOKUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Praktikum: DC-Motor}
+\date{\today}
+\author{Cyril Stoller, Marcel Bärtschi}
+\maketitle
+
+%% Inhaltsverzeichnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents %Inhaltsverzeichnis
+
+\vfill
+
+\listoffigures
+
+%\pagestyle{fancy} %%Ab hier die Kopf-/Fusszeilen: headings / fancy / ...
+
+\newpage
+
+\begin{abstract}
+	
+\begin{center}	
+\textbf{Abstract}
+\vspace{0.3cm}
+
+In diesem Versuch wird ein Gleichstrommotor und ein Gleichstromgenerator ausgemessen.
+\end{center}
+	
+\end{abstract}
+
+\vspace{2cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                         %%
+%%         Kapitel / Hauptteil des Dokumentes              %%
+%%                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\section{Ziel}
+
+Dieser Bericht beinhaltet genaue Angaben zur Durchführung und eine Diskussion des Versuches \emph{Mechatronik Grundlagen} im Modul \emph{???}. 
+
+\section{Einleitung}
+
+\subsection{Motivation}
+Die in der Vorlesung erlernte Theorie soll mit diesem Praktikum in der Praxis nachvollzogen und vertieft werden. Ausserdem soll während dem Praktikum ein Laborjournal geführt werden. Dies soll soweit geübt werden, dass es im Arbeitsalltag als Elektroingenieur zur Gewohnheit wird.
+
+\subsection{Aufgabenstellung}
+Die Aufgabenstellung ist unter \url{http://moodle.bfh.ch/} oder im Anhang zu finden.
+
+\section{Durchführung}
+
+
+\subsection{Diskussion}
+
+\section{Schlussfolgerung}
+
+
+\vfill
+\begin{tabular}{rr}
+	\\
+	\\
+	\\
+	\\
+	\toprule
+	\scriptsize{Datum und Unterschrift}	\hspace{3cm}	&	\textsc{Marcel Bärtschi}	\\
+	\\
+	\\
+	\\
+	\\
+	\toprule
+	\scriptsize{Datum und Unterschrift}	\hspace{3cm}	&	\textsc{Cyril Stoller}
+\end{tabular}
+
+
+% Der Anhang kommt auf eine neue Zeile
+\newpage
+% Offizielle "A Anhang" Aufzählungsvariante
+\appendix
+% Nur im Inhaltsverzeichnis hinzufügen (mit richtiger Seite, da vorher "\newpage"), aber kein Text
+\addcontentsline{toc}{section}{Anhang}
+
+% Quellenverzeichnis
+%\addcontentsline{toc}{section}{Quellenverzeichnis}
+\section{Quellenverzeichnis}
+\renewcommand\refname{}
+
+\vspace{-1cm}
+
+\bibliographystyle{amsplain}
+\bibliography{Bildquellen}
+
+\section{Messmittelliste}
+\begin{itemize}
+	\item Signalgenerator: HP 33120A (MG 231-2)
+	\item Speisegerät: TTi PL320QMD (MN 221-4)
+	\item Multimeter: HP 34401A (MM 319-2) (für RMS messungen)
+	\item Phasemeter: BFH-eigenes Gerät
+	\item KO:  Agilent DSO1022A (MK220-2)
+	\item Multimeter: roline RO-334 (für Widerstände und Speisegerät Kontrolle)
+\end{itemize}
+
+\section{Messtabelle}
+
+\begin{tabular}{|l|l|l|}
+	\hline
+	Frequenz in [Hz] & Amplitude EFF [mV] & Phase in [°] \\
+	\hline
+	\hline 200 &	87.6 & 70 \\
+	\hline
+	400	&84.9	&157 \\
+	\hline
+	600	&80.3	&307 \\
+	\hline
+	800	&68.3	&682 \\
+	\hline
+	850	&61.2	&886 \\
+	\hline
+	900	&49.7	&1190 \\
+	\hline
+	950	&29.6	&1599 \\
+	\hline
+	1000 &0	&1868 \\
+	\hline
+	1050 &-28.7	&1660 \\
+	\hline
+	1100 &-47	&1296 \\
+	\hline
+	1150 &-57.4	&1018 \\
+	\hline
+	1200 &-64.2	&828 \\
+	\hline
+	1400 &-75.5	&475 \\
+	\hline
+	1600 &-79.7	&338 \\
+	\hline
+	1800 &-81.9	&267 \\
+	\hline
+	2000 &-83.2 &222 \\
+	\hline
+	2200 &-84.1 &191 \\
+	\hline
+	\hline
+\end{tabular}
+
+\section{Matlab Code}
+
+\section{Aufgabenstellung Praktikum}
+
+\end{document}
