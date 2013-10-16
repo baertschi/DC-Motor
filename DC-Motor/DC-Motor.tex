@@ -29,14 +29,6 @@
 \usepackage[final]{pdfpages}
 \includepdfset{pages=-,noautoscale}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% TODO
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Optionen / Modifikationen
@@ -69,19 +61,19 @@
 %\pagestyle{fancy} %%Ab hier die Kopf-/Fusszeilen: headings / fancy / ...
 
 \newpage
-
-\begin{abstract}
-	
-\begin{center}	
-\textbf{Abstract}
-\vspace{0.3cm}
-
-In diesem Versuch wird ein Gleichstrommotor und ein Gleichstromgenerator ausgemessen.
-\end{center}
-	
-\end{abstract}
-
-\vspace{2cm}
+%
+%\begin{abstract}
+%	
+%\begin{center}	
+%\textbf{Abstract}
+%\vspace{0.3cm}
+%
+%In diesem Versuch wird ein Gleichstrommotor und ein Gleichstromgenerator ausgemessen.
+%\end{center}
+%	
+%\end{abstract}
+%
+%\vspace{2cm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,23 +86,75 @@ In diesem Versuch wird ein Gleichstrommotor und ein Gleichstromgenerator ausgeme
 
 \section{Ziel}
 
-Dieser Bericht beinhaltet genaue Angaben zur Durchführung und eine Diskussion des Versuches \emph{Mechatronik Grundlagen} im Modul \emph{???}. 
+Dieser Bericht beinhaltet genaue Angaben zur Durchführung und eine Diskussion des Versuches \emph{Messversuch Gleichstrommaschine} im Mechatronik-Modul \emph{BTE5360}.
 
 \section{Einleitung}
 
 \subsection{Motivation}
-Die in der Vorlesung erlernte Theorie soll mit diesem Praktikum in der Praxis nachvollzogen und vertieft werden. Ausserdem soll während dem Praktikum ein Laborjournal geführt werden. Dies soll soweit geübt werden, dass es im Arbeitsalltag als Elektroingenieur zur Gewohnheit wird.
+Die in der Vorlesung erlernte Theorie soll mit diesem Praktikum in der Praxis nachvollzogen und vertieft werden. Anhand von zwei mechanisch gekoppelten Motoren wird das grundlegende elektrotechnischen Verhalten eines DC-Motors als Motor und als Generator nachgewiesen und die Im Unterricht behandelten Formeln auf reale Messwerte angewendet.
 
 \subsection{Aufgabenstellung}
-Die Aufgabenstellung ist unter \url{http://moodle.bfh.ch/} oder im Anhang zu finden.
+Die Aufgabenstellung ist unter \url{http://moodle.bfh.ch/} oder in \autoref{sec:aufgabe} zu finden.
 
 \section{Durchführung}
+Hier werden nun die einzelnen Aufgaben separat und mit jeweils eigener abschliessender Diskussion behandelt.
 
+\subsection{Aufgabe 1}
+Die Schemas für die Aufgaben 4, 5, 7 und 8 sind in \autoref{img:schema4}, \autoref{img:schema5}, \autoref{img:schema7} und \autoref{img:schema8} zu sehen.
 
-\subsection{Diskussion}
+\subsection{Aufgabe 2}
+Bei unterschiedlichen Rotorstellungen haben wir die Werte in \autoref{tab:widerstaende} gemessen.
+
+\begin{table}[ht]\centering
+\begin{tabular}{@{}llllll@{}}
+	\toprule
+	 & \multicolumn{4}{c}{Widerstandsmessungen [$\Omega$]} & Mittelwert [$\Omega$] \\
+	\midrule
+	Motor 1	&	3.3 & 2.7 & 3.0 & 3.6 & 3.15 \\
+	Motor 2	& 2.4 & 2.7 & 2.9 & 3.2 & 2.8 \\
+	\bottomrule
+\end{tabular}
+\caption{Gemessene Wiederstandswerte}
+\label{tab:widerstaende}
+\end{table}
+
+Den Rotor mussten wird in verschiedene Stellungen positionieren, weil teilweise gewisse Leiterschleifen kurzgeschlossen sind und teilweise nicht --- So erhalten wir den ungefähren Mittelwert des Widerstandes. Die Messungen wurden jedoch alle mit stillstehendem Rotor gemacht, da ein drehender Rotor eine Spannung induzieren würde, welche dann auch am Multimeter anliegen würde. Dies hätte zur Folge, dass die Widerstandsmessung des Multimeters unbrauchbar würde.
+
+Der Vergleich mit den berechneten Widerstandswerten von Aufgabe 5 (siehe \autoref{sec:aufgabe5}) ist dort zu finden.
+
+\subsection{Aufgabe 4}
+Die Messung von $c\cdot\Phi$ wird folgendermassen gemacht: Der eine Motor wird mit einer Spannung von 10V gespiesen und dadurch der Rotor des zweiten Motors in drehung versetzt. Wird dieser zweite Motor nun nicht belastet (also dort $I_A$), fällt keine Spannung über $R_A$ ab und es entsteht auch keine Bürstenspannung. Deshalb kann beim zweiten Motor in diesem Fall beim Spannungsabgriff direkt $U_q$ gemessen werden.
+
+Die Drehzahl wird als Spannung $U_n$ mit folgender Proportion ausgegeben: $14.3V/1000U/min$. Die Drehfrequenz $n$ wurde nach Formel \ref{eq:v2hz} aus dieser Spannung berechnet.
+
+\begin{equation}
+n = \frac{U_n}{14.3V} \cdot \frac{1000\cdot1/min}{60\cdot s/min}
+\label{eq:v2hz}
+\end{equation}
+
+Die Messresultate sind in \autoref{tab:cphi} zu finden:
+
+\begin{table}[ht]\centering
+\begin{tabular}{@{}llll@{}}
+	\toprule
+	& Drehzahl [$Hz$] & $U_q$ [$V$] & berechnetes $c \cdot \Phi$ [$V \cdot s$]\\
+	\midrule
+	Motor 1	&	15.30 & 13.13 & 0.5631 \\
+	Motor 2	& 15.33 & 13.15 & 0.5631 \\
+	\bottomrule
+\end{tabular}
+\caption{Gemessenes $c \cdot \Phi$}
+\label{tab:cphi}
+\end{table}
+
+Wie man sieht, ergibt die 
+
+\subsection{Aufgabe 5}
+\label{sec:aufgabe5}
 
 \section{Schlussfolgerung}
 
+\section{Unterschriften}
 
 \vfill
 \begin{tabular}{rr}
@@ -148,59 +192,19 @@ Die Aufgabenstellung ist unter \url{http://moodle.bfh.ch/} oder im Anhang zu fin
 
 \section{Messmittelliste}
 \begin{itemize}
-	\item Signalgenerator: HP 33120A (MG 231-2)
-	\item Speisegerät: TTi PL320QMD (MN 221-4)
-	\item Multimeter: HP 34401A (MM 319-2) (für RMS messungen)
-	\item Phasemeter: BFH-eigenes Gerät
-	\item KO:  Agilent DSO1022A (MK220-2)
-	\item Multimeter: roline RO-334 (für Widerstände und Speisegerät Kontrolle)
+	\item Multimeter: 2x TENMA 72-7755
+	\item Multimeter: RO-334
+	\item Multimeter: Siemens Multizet (MM 602-1)
+	\item Speisegerät: ???
+	\item Motor links: ???
+	\item Motor rechts: ???
 \end{itemize}
 
-\section{Messtabelle}
-
-\begin{tabular}{|l|l|l|}
-	\hline
-	Frequenz in [Hz] & Amplitude EFF [mV] & Phase in [°] \\
-	\hline
-	\hline 200 &	87.6 & 70 \\
-	\hline
-	400	&84.9	&157 \\
-	\hline
-	600	&80.3	&307 \\
-	\hline
-	800	&68.3	&682 \\
-	\hline
-	850	&61.2	&886 \\
-	\hline
-	900	&49.7	&1190 \\
-	\hline
-	950	&29.6	&1599 \\
-	\hline
-	1000 &0	&1868 \\
-	\hline
-	1050 &-28.7	&1660 \\
-	\hline
-	1100 &-47	&1296 \\
-	\hline
-	1150 &-57.4	&1018 \\
-	\hline
-	1200 &-64.2	&828 \\
-	\hline
-	1400 &-75.5	&475 \\
-	\hline
-	1600 &-79.7	&338 \\
-	\hline
-	1800 &-81.9	&267 \\
-	\hline
-	2000 &-83.2 &222 \\
-	\hline
-	2200 &-84.1 &191 \\
-	\hline
-	\hline
-\end{tabular}
-
 \section{Matlab Code}
+\includepdf{Matlab-Skript.pdf}
 
 \section{Aufgabenstellung Praktikum}
+\label{sec:aufgabe}
+\includepdf{Anhang-Versuch-Gleichstrommaschine.pdf}
 
 \end{document}
