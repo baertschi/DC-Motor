@@ -1,0 +1,3 @@
+- messgeräte: netzteil, motoren, widerstand
+- bilder: motor
+- 

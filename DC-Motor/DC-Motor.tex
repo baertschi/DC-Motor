@@ -91,16 +91,32 @@ Dieser Bericht beinhaltet genaue Angaben zur Durchführung und eine Diskussion de
 \section{Einleitung}
 
 \subsection{Motivation}
-Die in der Vorlesung erlernte Theorie soll mit diesem Praktikum in der Praxis nachvollzogen und vertieft werden. Anhand von zwei mechanisch gekoppelten Motoren wird das grundlegende elektrotechnischen Verhalten eines DC-Motors als Motor und als Generator nachgewiesen und die Im Unterricht behandelten Formeln auf reale Messwerte angewendet.
+Die in der Vorlesung erlernte Theorie soll mit diesem Praktikum in der Praxis nachvollzogen und vertieft werden. Anhand von zwei mechanisch gekoppelten Motoren wird das grundlegende elektrotechnische Verhalten eines DC-Motors als Motor und als Generator nachgewiesen und die im Unterricht behandelten Formeln auf reale Messwerte angewendet.
 
 \subsection{Aufgabenstellung}
 Die Aufgabenstellung ist unter \url{http://moodle.bfh.ch/} oder in \autoref{sec:aufgabe} zu finden.
 
 \section{Durchführung}
-Hier werden nun die einzelnen Aufgaben separat und mit jeweils eigener abschliessender Diskussion behandelt.
+Hier werden nun die einzelnen Aufgaben separat und mit jeweils eigener abschliessender Diskussion behandelt. Im Folgenden wird der linke Motor auf dem Messaufbau \emph{Motor 1} und der rechte Motor \emph{Motor 2} genannt.
+
+<abbildung>
 
 \subsection{Aufgabe 1}
-Die Schemas für die Aufgaben 4, 5, 7 und 8 sind in \autoref{img:schema4}, \autoref{img:schema5}, \autoref{img:schema7} und \autoref{img:schema8} zu sehen.
+Das Schema für die Aufgabe 4 ist in \autoref{fig:schema4} zusehen, das Schema für die Aufgaben 5, 7 und 8 in \autoref{fig:schema578}.
+
+\begin{figure}[ht]
+	\centering
+		\includegraphics[width=0.6\textwidth]{images/SchemaAufg4.pdf}
+	\caption{Messschema für Aufgabe 4}
+	\label{fig:schema4}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+		\includegraphics[width=0.8\textwidth]{images/SchemaAufg578.pdf}
+	\caption{Messschema für die Aufgaben 5, 7 und 8}
+	\label{fig:schema578}
+\end{figure}
 
 \subsection{Aufgabe 2}
 Bei unterschiedlichen Rotorstellungen haben wir die Werte in \autoref{tab:widerstaende} gemessen.
@@ -123,14 +139,17 @@ Den Rotor mussten wird in verschiedene Stellungen positionieren, weil teilweise 
 Der Vergleich mit den berechneten Widerstandswerten von Aufgabe 5 (siehe \autoref{sec:aufgabe5}) ist dort zu finden.
 
 \subsection{Aufgabe 4}
-Die Messung von $c\cdot\Phi$ wird folgendermassen gemacht: Der eine Motor wird mit einer Spannung von 10V gespiesen und dadurch der Rotor des zweiten Motors in drehung versetzt. Wird dieser zweite Motor nun nicht belastet (also dort $I_A$), fällt keine Spannung über $R_A$ ab und es entsteht auch keine Bürstenspannung. Deshalb kann beim zweiten Motor in diesem Fall beim Spannungsabgriff direkt $U_q$ gemessen werden.
+Die Messung von $c\cdot\Phi$ wird folgendermassen gemacht: Der eine Motor wird mit einer Spannung von 10V gespiesen und dadurch der Rotor des zweiten Motors in Drehung versetzt. Wird dieser zweite Motor nun nicht belastet (also ist dort $I_A = 0A$), fällt keine Spannung über $R_A$ ab und es entsteht auch keine Bürstenspannung. Deshalb kann beim zweiten Motor in diesem Fall beim Spannungsabgriff direkt $U_q$ gemessen werden. Die Messung basiert auf dem Schema in \autoref{fig:schema4}.
 
-Die Drehzahl wird als Spannung $U_n$ mit folgender Proportion ausgegeben: $14.3V/1000U/min$. Die Drehfrequenz $n$ wurde nach Formel \ref{eq:v2hz} aus dieser Spannung berechnet.
+\subsubsection{Drehzahlmessung}
+Die Drehzahl wird immer als Spannung $U_n$ mit folgender Proportion ausgegeben: 14.3V/1000U/min. Die Drehfrequenz $n$ wurde im ganzen Laborversuch nach Gleichung \ref{eq:v2hz} aus dieser Spannung berechnet.
 
 \begin{equation}
 n = \frac{U_n}{14.3V} \cdot \frac{1000\cdot1/min}{60\cdot s/min}
 \label{eq:v2hz}
 \end{equation}
+
+\subsubsection{Resultate und Diskussion}
 
 Die Messresultate sind in \autoref{tab:cphi} zu finden:
 
@@ -143,14 +162,57 @@ Die Messresultate sind in \autoref{tab:cphi} zu finden:
 	Motor 2	& 15.33 & 13.15 & 0.5631 \\
 	\bottomrule
 \end{tabular}
-\caption{Gemessenes $c \cdot \Phi$}
+\caption{Berechnetes $c \cdot \Phi$}
 \label{tab:cphi}
 \end{table}
 
-Wie man sieht, ergibt die 
+Wie man sieht, ist das resultierende $c \cdot \Phi$ beider Motoren genau gleich. Die Genauigkeit der Übereinstimmung überrascht zwar etwas, aber es war zu erwarten, dass zwei identische Motoren identische mechanische Eigenschaften haben (welche ja durch $c \cdot \Phi$ beschrieben werden).
 
 \subsection{Aufgabe 5}
 \label{sec:aufgabe5}
+
+Diese Messung basiert auf dem Schema in \autoref{fig:schema578}. Insgesamt wurden vier Messserien aufgenommen: Beide Motoren wurden bei je einer Drehzahl von $1800rpm$ und $900rpm$ ausgemessen. Dabei wurde jeweils der eine Motor mit $I_{Mot}$ gespiesen und der andere (so gesehen als Generator geschaltet) mit einem Lastwiderstand belastet und dessen $I_{Gen}$ gemessen. Jede Messserie beinhaltet Datenpunkte von $I_{Gen}$ von $0A$ bis hin zum maximal zulässigen Strom an $I_{Mot}$ (bei unserem Modell: $I_{max} = 3.5A$).
+
+Es wurden jeweils mindestens fünf Datenpunkte aufgenommen und währenddessen die Drehzahl möglich konstant (auf $1800rpm$ bzw. $900rpm$) gehalten.
+
+\subsubsection{Resultate und Diskussion}
+%Die Resultate können in \autoref{}, \autoref{}, \autoref{} und \autoref{}betrachtet werden.
+<abbildung>
+
+\subsection{Aufgabe 6}
+Für die Berechnung von $n$ in Abhängigkeit des inneren Momentes wurde Gleichung \ref{eq:n-mi} verwendet:
+
+\begin{equation}
+n = \frac{U_A}{c \cdot \Phi} \mp \frac{2 \cdot \pi \cdot R_A}{(c \cdot \Phi)^2}  \cdot  M_i \mp \frac{2 \cdot U_B}{c \cdot \Phi}
+\label{eq:n-mi}
+\end{equation}
+
+Da $M_i$ nicht direkt bekannt ist, wurde Gleichung \ref{eq:mi} angewendet, um vom Strom $I_{Gen}$ auf das innere Moment zu kommen:
+
+\begin{equation}
+M_i = \frac{c}{2 \pi} \cdot \Phi \cdot I_A
+\label{eq:mi}
+\end{equation}
+
+Die Resultate dieser Berechnung sind in den Diagrammen von Aufgabe 7 (siehe \autoref{sec:aufgabe7}) enthalten.
+
+\subsection{Aufgabe 7}
+\label{sec:aufgabe7}
+
+Das Moment $M_{Welle}$ wurde nach Gleichung \ref{eq:mwelle} berechnet:
+
+\begin{equation}
+M_{Welle} = \frac{1}{2} \cdot \left( \frac{c_{Mot} \cdot \Phi_{Mot}}{2 \pi} \cdot I_{AMot} + \frac{c_{Gen} \cdot \Phi_{Gen}}{2 \pi} \cdot I_{AGen} \right)
+\label{eq:mwelle}
+\end{equation}
+
+Da aber laut \autoref{tab:cphi} $c_{Mot} \cdot \Phi_{Mot} = c_{Gen} \cdot \Phi_{Gen}$, kann diese Gleichung noch vereinfacht werden:
+
+\begin{equation}
+M_{Welle} = trololo
+\label{eq:mwelle2}
+\end{equation}
+
 
 \section{Schlussfolgerung}
 
