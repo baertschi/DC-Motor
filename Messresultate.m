@@ -117,24 +117,34 @@ disp('Berechnung c * Phi')
 disp(['c_Phi 1 = ' num2str(c_phi1) ' V/s'])
 disp(['c_Phi 2 = ' num2str(c_phi2) ' V/s'])
 
-% Darstellen Aufgabe 5
+%% Darstellen Aufgabe 5
+figure
+subplot(1,2,1)
 title('U/I-Kennlinie Motor 2')
 plot(Motor2_1800rpm(:,4), Motor2_1800rpm(:,5), 'LineSmoothing', 'on')
 xlabel('I_{Gen} [A]')
-ylabel('U_{Gen} [V]')
+ylabel('U_{Gen} [V], P [W]')
 hold all
 grid on
 % Pelektrisch Generator
-plot (Motor2_1800rpm(:,4),PelGen_1800M2G, 'LineSmoothing', 'on')
+plot(Motor2_1800rpm(:,4),PelGen_1800M2G, 'LineSmoothing', 'on')
 % Pelektrisch Motor
-plot (Motor2_1800rpm(:,4),PelMot_1800M2G, 'LineSmoothing', 'on')
+plot(Motor2_1800rpm(:,4),PelMot_1800M2G, 'LineSmoothing', 'on')
 % Pwelle
-plot (Motor2_1800rpm(:,4),Pwelle_1800M2G, 'LineSmoothing', 'on')
-% Mwelle
-plot (Motor2_1800rpm(:,4),Mwelle_1800M2G, 'LineSmoothing', 'on')
-% etawelle
-plot (Motor2_1800rpm(:,4),etaGen_1800M2G, 'LineSmoothing', 'on')
-legend('U/I-Kennlinie', 'P_{el.Gen}', 'P_{el.Mot}', 'P_{Welle}', 'M_{Welle}', '\eta_{Welle}')
+plot(Motor2_1800rpm(:,4),Pwelle_1800M2G, 'LineSmoothing', 'on')
+legend('U/I-Kennlinie', 'P_{el.Gen}', 'P_{el.Mot}', 'P_{Welle}', 'Location', 'NorthWest')
+
+subplot(1,2,2)
+title('Moment und Wirkungsgrad Motor 2');
+% Mwelle und etawelle
+[AX,h1,h2] = plotyy(Motor2_1800rpm(:,4),Mwelle_1800M2G, Motor2_1800rpm(:,4),etaGen_1800M2G);
+set(h1,'LineSmoothing', 'on');
+set(h2,'LineSmoothing', 'on');
+xlabel('I_{Gen} [A]')
+ylabel('M [Nm]');
+set(get(AX(2),'Ylabel'),'String','\eta') 
+grid on
+legend('M_{Welle}', '\eta_{Welle}')
 
 
 
