@@ -44,21 +44,29 @@ PelMot_1800M2G = Motor2_1800rpm(:,2).*Motor2_1800rpm(:,3);
 Mwelle_1800M2G = 0.5*c_phi1/(2*pi)*(Motor2_1800rpm(:,2)+Motor2_1800rpm(:,4));
 Pwelle_1800M2G = 2*pi*Mwelle_1800M2G.*v2hz(Motor2_1800rpm(:,1));
 etaGen_1800M2G = PelGen_1800M2G./Pwelle_1800M2G;
-% Generator: Motor 2 900rpm
 
+% Generator: Motor 2 900rpm
 P_Motor2_900rpm = polyfit(Motor2_900rpm(3:end,4), Motor2_900rpm(3:end,5), 1);
 r2_900rpm = -P_Motor2_900rpm(1);
 ub_r2_900rpm = (Motor2_900rpm(1,3) - P_Motor2_900rpm(2))/2;
 
-PelGen_900rpmM2 = Motor2_900rpm(:,4).*Motor2_900rpm(:,5);
-
+PelGen_900M2G = Motor2_900rpm(:,4).*Motor2_900rpm(:,5);
+PelMot_900M2G = Motor2_900rpm(:,2).*Motor2_900rpm(:,3);
+Mwelle_900M2G = 0.5*c_phi1/(2*pi)*(Motor2_900rpm(:,2)+Motor2_900rpm(:,4));
+Pwelle_900M2G = 2*pi*Mwelle_900M2G.*v2hz(Motor2_900rpm(:,1));
+etaGen_900M2G = PelGen_900M2G./Pwelle_900M2G;
 % Generator: Motor 1 1800rpm
 
 P_Motor1_1800rpm = polyfit(Motor1_1800rpm(3:end,2), Motor1_1800rpm(3:end,3), 1);
 r1_1800rpm = -P_Motor1_1800rpm(1);
 ub_r1_1800rpm = (Motor1_1800rpm(1,3) - P_Motor1_1800rpm(2))/2;
 
-PelGen_1800rpmM1 = Motor1_1800rpm(:,2).*Motor1_1800rpm(:,3);
+% PelGen_1800rpmM1 = Motor1_1800rpm(:,2).*Motor1_1800rpm(:,3);
+PelGen_1800M1G = Motor1_1800rpm(:,2).*Motor1_1800rpm(:,3);
+PelMot_1800M1G = Motor1_1800rpm(:,4).*Motor1_1800rpm(:,5);
+Mwelle_1800M1G = 0.5*c_phi1/(2*pi)*(Motor1_1800rpm(:,4)+Motor1_1800rpm(:,2));
+Pwelle_1800M1G = 2*pi*Mwelle_1800M1G.*v2hz(Motor1_1800rpm(:,1));
+etaGen_1800M1G = PelGen_1800M1G./Pwelle_1800M1G;
 
 % Generator: Motor 1 900rpm
 
@@ -66,8 +74,12 @@ P_Motor1_900rpm = polyfit(Motor1_900rpm(3:end,2), Motor1_900rpm(3:end,3), 1);
 r1_900rpm = -P_Motor1_900rpm(1);
 ub_r1_900rpm = (Motor1_900rpm(1,3) - P_Motor1_900rpm(2))/2;
 
-PelGen_900rpmM1 = Motor1_900rpm(:,4).*Motor1_900rpm(:,5);
-
+% PelGen_900rpmM1 = Motor1_900rpm(:,4).*Motor1_900rpm(:,5);
+PelGen_900M1G = Motor1_900rpm(:,2).*Motor1_900rpm(:,3);
+PelMot_900M1G = Motor1_900rpm(:,4).*Motor1_900rpm(:,5);
+Mwelle_900M1G = 0.5*c_phi1/(2*pi)*(Motor1_900rpm(:,4)+Motor1_900rpm(:,2));
+Pwelle_900M1G = 2*pi*Mwelle_900M1G.*v2hz(Motor1_900rpm(:,1));
+etaGen_900M1G = PelGen_900M1G./Pwelle_900M1G;
 
 %% Aufgabe 7
 % Soll Speisespannungen: 20V und 40V
@@ -120,7 +132,7 @@ disp(['c_Phi 2 = ' num2str(c_phi2) ' V/s'])
 %% Darstellen Aufgabe 5
 figure
 subplot(1,2,1)
-title('U/I-Kennlinie Motor 2')
+title('U/I-Kennlinie Motor 2 n=1800rpm')
 plot(Motor2_1800rpm(:,4), Motor2_1800rpm(:,5), 'LineSmoothing', 'on')
 xlabel('I_{Gen} [A]')
 ylabel('U_{Gen} [V], P [W]')
@@ -146,7 +158,92 @@ set(get(AX(2),'Ylabel'),'String','\eta')
 grid on
 legend('M_{Welle}', '\eta_{Welle}')
 
+% Motor 2 900rpm
+figure
+subplot(1,2,1)
+title('U/I-Kennlinie Motor 2 n=900rpm')
+plot(Motor2_900rpm(:,4), Motor2_900rpm(:,5), 'LineSmoothing', 'on')
+xlabel('I_{Gen} [A]')
+ylabel('U_{Gen} [V], P [W]')
+hold all
+grid on
+% Pelektrisch Generator
+plot(Motor2_900rpm(:,4),PelGen_900M2G, 'LineSmoothing', 'on')
+% Pelektrisch Motor
+plot(Motor2_900rpm(:,4),PelMot_900M2G, 'LineSmoothing', 'on')
+% Pwelle
+plot(Motor2_900rpm(:,4),Pwelle_900M2G, 'LineSmoothing', 'on')
+legend('U/I-Kennlinie', 'P_{el.Gen}', 'P_{el.Mot}', 'P_{Welle}', 'Location', 'NorthWest')
 
+subplot(1,2,2)
+title('Moment und Wirkungsgrad Motor 2');
+% Mwelle und etawelle
+[AX,h1,h2] = plotyy(Motor2_900rpm(:,4),Mwelle_900M2G, Motor2_900rpm(:,4),etaGen_900M2G);
+set(h1,'LineSmoothing', 'on');
+set(h2,'LineSmoothing', 'on');
+xlabel('I_{Gen} [A]')
+ylabel('M [Nm]');
+set(get(AX(2),'Ylabel'),'String','\eta') 
+grid on
+legend('M_{Welle}', '\eta_{Welle}')
+
+% Motor 1 1800rpm
+figure
+subplot(1,2,1)
+title('U/I-Kennlinie Motor 2 n=1800rpm')
+plot(Motor1_1800rpm(:,2), Motor1_1800rpm(:,3), 'LineSmoothing', 'on')
+xlabel('I_{Gen} [A]')
+ylabel('U_{Gen} [V], P [W]')
+hold all
+grid on
+% Pelektrisch Generator
+plot(Motor1_1800rpm(:,2),PelGen_1800M1G, 'LineSmoothing', 'on')
+% Pelektrisch Motor
+plot(Motor1_1800rpm(:,2),PelMot_1800M1G, 'LineSmoothing', 'on')
+% Pwelle
+plot(Motor1_1800rpm(:,2),Pwelle_1800M1G, 'LineSmoothing', 'on')
+legend('U/I-Kennlinie', 'P_{el.Gen}', 'P_{el.Mot}', 'P_{Welle}', 'Location', 'NorthWest')
+
+subplot(1,2,2)
+title('Moment und Wirkungsgrad Motor 2');
+% Mwelle und etawelle
+[AX,h1,h2] = plotyy(Motor1_1800rpm(:,2),Mwelle_1800M1G, Motor1_1800rpm(:,2),etaGen_1800M1G);
+set(h1,'LineSmoothing', 'on');
+set(h2,'LineSmoothing', 'on');
+xlabel('I_{Gen} [A]')
+ylabel('M [Nm]');
+set(get(AX(2),'Ylabel'),'String','\eta') 
+grid on
+legend('M_{Welle}', '\eta_{Welle}')
+
+% Motor 1 900rpm
+figure
+subplot(1,2,1)
+title('U/I-Kennlinie Motor 2 n=1800rpm')
+plot(Motor1_900rpm(:,2), Motor1_900rpm(:,3), 'LineSmoothing', 'on')
+xlabel('I_{Gen} [A]')
+ylabel('U_{Gen} [V], P [W]')
+hold all
+grid on
+% Pelektrisch Generator
+plot(Motor1_900rpm(:,2),PelGen_900M1G, 'LineSmoothing', 'on')
+% Pelektrisch Motor
+plot(Motor1_900rpm(:,2),PelMot_900M1G, 'LineSmoothing', 'on')
+% Pwelle
+plot(Motor1_900rpm(:,2),Pwelle_900M1G, 'LineSmoothing', 'on')
+legend('U/I-Kennlinie', 'P_{el.Gen}', 'P_{el.Mot}', 'P_{Welle}', 'Location', 'NorthWest')
+
+subplot(1,2,2)
+title('Moment und Wirkungsgrad Motor 2');
+% Mwelle und etawelle
+[AX,h1,h2] = plotyy(Motor1_900rpm(:,2),Mwelle_900M1G, Motor1_900rpm(:,2),etaGen_900M1G);
+set(h1,'LineSmoothing', 'on');
+set(h2,'LineSmoothing', 'on');
+xlabel('I_{Gen} [A]')
+ylabel('M [Nm]');
+set(get(AX(2),'Ylabel'),'String','\eta') 
+grid on
+legend('M_{Welle}', '\eta_{Welle}')
 
 
 
