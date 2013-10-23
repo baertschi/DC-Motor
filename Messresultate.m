@@ -83,6 +83,8 @@ Pwelle_900M1G = 2*pi*Mwelle_900M1G.*v2hz(Motor1_900rpm(:,1));
 etaGen_900M1G = PelGen_900M1G./Pwelle_900M1G;
 
 %% Aufgabe 6
+r1_warm = mean([2.6 2.4 2.4 2.5]);
+r2_warm = mean([2.3 2.2 2.5]);
 % Berechnung der theoretischen Drehzahl
 nMi_20V = 1/c_phi1*(20-r1_warm*linspace(0,3.5,10)' - 2*ub_r1_1800rpm);
 nMi_40V = 1/c_phi1*(40-r1_warm*linspace(0,3.5,10)' - 2*ub_r1_1800rpm);
@@ -141,8 +143,7 @@ Pwelle_10Ohm_M1G = 2*pi*Mwelle_10Ohm_M1G.*v2hz(Motor1_10Ohm(:,1));
 etaGen_10Ohm_M1G = PelGen_10Ohm_M1G./Pwelle_10Ohm_M1G;
 
 %% Aufgabe 9
-r1_warm = mean([2.6 2.4 2.4 2.5]);
-r2_warm = mean([2.3 2.2 2.5]);
+% (siehe aufgabe 6)
 
 %% Aufgabe 10
 
@@ -176,7 +177,7 @@ disp('Berechnung c * Phi')
 disp(['c_Phi 1 = ' num2str(c_phi1) ' V/s'])
 disp(['c_Phi 2 = ' num2str(c_phi2) ' V/s'])
 
-%% Darstellen Aufgabe 5
+%% Darstellen Aufgabe 5 --> schönere Darstellung mit f=figure; set(f, 'Units', 'normalized', 'Position', [0.2, 0.1, 0.7, 0.5]);
 figure
 subplot(1,2,1)
 
@@ -205,6 +206,9 @@ ylabel('M [Nm]');
 set(get(AX(2),'Ylabel'),'String','\eta') 
 grid on
 legend('M_{Welle}', '\eta_{Welle}')
+
+filename = ['plots/aufgabe5-motor1-1800rpm.png'];
+print('-dpng', filename);
 
 % Motor 2 900rpm
 figure
@@ -237,6 +241,9 @@ set(get(AX(2),'Ylabel'),'String','\eta')
 grid on
 legend('M_{Welle}', '\eta_{Welle}')
 
+filename = ['plots/aufgabe5-motor1-900rpm.png'];
+print('-dpng', filename);
+
 % Motor 1 1800rpm
 figure
 subplot(1,2,1)
@@ -266,6 +273,9 @@ ylabel('M [Nm]');
 set(get(AX(2),'Ylabel'),'String','\eta') 
 grid on
 legend('M_{Welle}', '\eta_{Welle}')
+
+filename = ['plots/aufgabe5-motor2-1800rpm.png'];
+print('-dpng', filename);
 
 % Motor 1 900rpm
 figure
@@ -297,6 +307,9 @@ set(get(AX(2),'Ylabel'),'String','\eta')
 grid on
 legend('M_{Welle}', '\eta_{Welle}')
 
+filename = ['plots/aufgabe5-motor2-900rpm.png'];
+print('-dpng', filename);
+
 % Darstellung Aufgabe 7
 % Motor 1 als Generator 20V
 figure
@@ -327,6 +340,9 @@ set(get(AX(2),'Ylabel'),'String','\eta')
 grid on
 legend('M_{Welle}', '\eta_{Welle}')
 
+filename = ['plots/aufgabe7-motor2-20V.png'];
+print('-dpng', filename);
+
 % Motor 1 als Generator 40V
 figure
 subplot(1,2,1)
@@ -355,6 +371,9 @@ ylabel('M [Nm]');
 set(get(AX(2),'Ylabel'),'String','\eta') 
 grid on
 legend('M_{Welle}', '\eta_{Welle}')
+
+filename = ['plots/aufgabe7-motor2-40V.png'];
+print('-dpng', filename);
 
 % Motor 2 als Generator 20V
 figure
@@ -385,6 +404,9 @@ set(get(AX(2),'Ylabel'),'String','\eta')
 grid on
 legend('M_{Welle}', '\eta_{Welle}')
 
+filename = ['plots/aufgabe7-motor1-20V.png'];
+print('-dpng', filename);
+
 % Motor 2 als Generator 40V
 figure
 subplot(1,2,1)
@@ -413,4 +435,7 @@ ylabel('M [Nm]');
 set(get(AX(2),'Ylabel'),'String','\eta') 
 grid on
 legend('M_{Welle}', '\eta_{Welle}')
+
+filename = ['plots/aufgabe7-motor1-40V.png'];
+print('-dpng', filename);
 
