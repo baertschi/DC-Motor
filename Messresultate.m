@@ -128,8 +128,17 @@ etaGen_40V_M2G = PelGen_40V_M2G./Pwelle_40V_M2G;
 
 %% Aufgabe 8
 % Soll Speisespannung: 40V (mit Vorwiderstand)
-Motor1_40V_10Ohm= xlsread('Messresultate.xlsx', 'Tabelle3', 'B3:F8');
-Motor2_40V_10Ohm = xlsread('Messresultate.xlsx', 'Tabelle3', 'B16:F20');
+Motor1_10Ohm= xlsread('Messresultate.xlsx', 'Tabelle3', 'B3:F8');
+Motor2_10Ohm = xlsread('Messresultate.xlsx', 'Tabelle3', 'B16:F20');
+
+% Motor 1 Generator, Rv = 10Ohm
+nMwelle_10Ohm_M1G = v2rpm(Motor1_10Ohm(:,1));
+PelMot_10Ohm_M1G = Motor1_10Ohm(:,2).*(40-Motor1_10Ohm(:,3));
+PelGen_10Ohm_M1G = Motor1_10Ohm(:,4).*Motor1_10Ohm(:,5);
+PelRes_10Ohm_M1G = Motor1_10Ohm(:,2).*Motor1_10Ohm(:,3);
+Mwelle_10Ohm_M1G = 0.5*c_phi1/(2*pi)*(Motor1_10Ohm(:,4)+Motor1_10Ohm(:,2));
+Pwelle_10Ohm_M1G = 2*pi*Mwelle_10Ohm_M1G.*v2hz(Motor1_10Ohm(:,1));
+etaGen_10Ohm_M1G = PelGen_10Ohm_M1G./Pwelle_10Ohm_M1G;
 
 %% Aufgabe 9
 r1_warm = mean([2.6 2.4 2.4 2.5]);
