@@ -142,6 +142,15 @@ Mwelle_10Ohm_M1G = 0.5*c_phi1/(2*pi)*(Motor1_10Ohm(:,4)+Motor1_10Ohm(:,2));
 Pwelle_10Ohm_M1G = 2*pi*Mwelle_10Ohm_M1G.*v2hz(Motor1_10Ohm(:,1));
 etaGen_10Ohm_M1G = PelGen_10Ohm_M1G./Pwelle_10Ohm_M1G;
 
+% Motor 2 Generator, Rv = 10Ohm
+nMwelle_10Ohm_M2G = v2rpm(Motor2_10Ohm(:,1));
+PelMot_10Ohm_M2G = Motor2_10Ohm(:,4).*(40-Motor2_10Ohm(:,5));
+PelGen_10Ohm_M2G = Motor2_10Ohm(:,2).*Motor2_10Ohm(:,3);
+PelRes_10Ohm_M2G = Motor2_10Ohm(:,4).*Motor2_10Ohm(:,5);
+Mwelle_10Ohm_M2G = 0.5*c_phi1/(2*pi)*(Motor2_10Ohm(:,2)+Motor2_10Ohm(:,4));
+Pwelle_10Ohm_M2G = 2*pi*Mwelle_10Ohm_M2G.*v2hz(Motor2_10Ohm(:,1));
+etaGen_10Ohm_M2G = PelGen_10Ohm_M2G./Pwelle_10Ohm_M2G;
+
 %% Aufgabe 9
 % (siehe aufgabe 6)
 
@@ -310,7 +319,7 @@ legend('M_{Welle}', '\eta_{Welle}')
 filename = ['plots/aufgabe5-motor2-900rpm.png'];
 print('-dpng', filename);
 
-% Darstellung Aufgabe 7
+%% Darstellung Aufgabe 7
 % Motor 1 als Generator 20V
 figure
 subplot(1,2,1)
@@ -439,3 +448,73 @@ legend('M_{Welle}', '\eta_{Welle}')
 filename = ['plots/aufgabe7-motor1-40V.png'];
 print('-dpng', filename);
 
+
+%% Darstellung Aufgabe 8
+% Motor 2 als Generator, Rv = 10Ohm
+figure
+subplot(1,2,1)
+
+% Pelektrisch Generator
+plot(Motor1_10Ohm(:,4),PelGen_10Ohm_M1G, 'LineSmoothing', 'on')
+title('Generator: Motor 2, mit Vorwiderstand')
+xlabel('I_{Gen} [A]')
+ylabel('P [W]')
+hold all
+grid on
+% Pelektrisch Motor
+plot(Motor1_10Ohm(:,4),PelMot_10Ohm_M1G, 'LineSmoothing', 'on')
+% Pwelle
+plot(Motor1_10Ohm(:,4),Pwelle_10Ohm_M1G, 'LineSmoothing', 'on')
+% Pvorwiderstand
+plot(Motor1_10Ohm(:,4),PelRes_10Ohm_M1G, 'LineSmoothing', 'on')
+legend('P_{el.Gen}', 'P_{el.Mot}', 'P_{Welle}', 'P_{Rvor}', 'Location', 'NorthWest')
+
+subplot(1,2,2)
+% Mwelle und etawelle
+[AX,h1,h2] = plotyy(Motor1_10Ohm(:,4),Mwelle_10Ohm_M1G, Motor1_10Ohm(:,4),etaGen_10Ohm_M1G);
+title('Moment und Wirkungsgrad');
+set(h1,'LineSmoothing', 'on');
+set(h2,'LineSmoothing', 'on');
+xlabel('I_{Gen} [A]')
+ylabel('M [Nm]');
+set(get(AX(2),'Ylabel'),'String','\eta') 
+grid on
+legend('M_{Welle}', '\eta_{Welle}')
+
+filename = ['plots/aufgabe8-motor1-10Ohm.png'];
+print('-dpng', filename);
+
+
+% Motor 1 als Generator, Rv = 10Ohm
+figure
+subplot(1,2,1)
+
+% Pelektrisch Generator
+plot(Motor2_10Ohm(:,4),PelGen_10Ohm_M2G, 'LineSmoothing', 'on')
+title('Generator: Motor 1, mit Vorwiderstand')
+xlabel('I_{Gen} [A]')
+ylabel('P [W]')
+hold all
+grid on
+% Pelektrisch Motor
+plot(Motor2_10Ohm(:,4),PelMot_10Ohm_M2G, 'LineSmoothing', 'on')
+% Pwelle
+plot(Motor2_10Ohm(:,4),Pwelle_10Ohm_M2G, 'LineSmoothing', 'on')
+% Pvorwiderstand
+plot(Motor2_10Ohm(:,4),PelRes_10Ohm_M2G, 'LineSmoothing', 'on')
+legend('P_{el.Gen}', 'P_{el.Mot}', 'P_{Welle}', 'P_{Rvor}', 'Location', 'NorthWest')
+
+subplot(1,2,2)
+% Mwelle und etawelle
+[AX,h1,h2] = plotyy(Motor2_10Ohm(:,4),Mwelle_10Ohm_M2G, Motor2_10Ohm(:,4),etaGen_10Ohm_M2G);
+title('Moment und Wirkungsgrad');
+set(h1,'LineSmoothing', 'on');
+set(h2,'LineSmoothing', 'on');
+xlabel('I_{Gen} [A]')
+ylabel('M [Nm]');
+set(get(AX(2),'Ylabel'),'String','\eta') 
+grid on
+legend('M_{Welle}', '\eta_{Welle}')
+
+filename = ['plots/aufgabe8-motor2-10Ohm.png'];
+print('-dpng', filename);
