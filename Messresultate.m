@@ -15,7 +15,7 @@ r2 = mean([2.4 2.7 2.9 3.2]);
 
 % Herauslesen der warmen Widerstände nach Augfgabe 10:
 r1_warm = mean([2.6 2.4 2.4 2.5]);
-r2_warm = mean([2.3 2.2 2.5]);
+r2_warm = mean([2.3 2.2 2.5 2.4]);
 
 % für die Berechnung der Widerstände im drehenden Zustand mit POLYFIT siehe
 % Aufgabe 5!!!
