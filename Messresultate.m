@@ -430,3 +430,4 @@ legend('M_{Welle}', '\eta_{Welle}')
 filename = ['plots/aufgabe7-motor1-40V.png'];
 print('-dpng', filename);
 
+% Darstellung Aufgabe 7
