@@ -1,14 +1,24 @@
 % Laborversuch Mechatronik
 % Motor Ausmessen
 
+clear all; close all
+
 v2hz = @(v) v/14.3*1000/60;
 v2rpm = @(v) v/14.3*1000;
 rpm2v = @(rpm) rpm/1000*14.3;
+hz2rpm = @(hz) hz*60;
 
-%% Aufgabe 1
+%% Aufgabe 2
 % Widerstand variiert je nach Rotorstellung:
 r1 = mean([3.3 2.7 3.0 3.6]);
 r2 = mean([2.4 2.7 2.9 3.2]);
+
+% Herauslesen der warmen Widerstände nach Augfgabe 10:
+r1_warm = mean([2.6 2.4 2.4 2.5]);
+r2_warm = mean([2.3 2.2 2.5]);
+
+% für die Berechnung der Widerstände im drehenden Zustand mit POLYFIT siehe
+% Aufgabe 5!!!
 
 %% Aufgabe 4
 % Uq = c*phi"n  -->  c*phi = Uq/n
@@ -34,7 +44,8 @@ Motor2_900rpm = xlsread('Messresultate.xlsx', 'Tabelle1', 'B13:F18');
 Motor1_1800rpm = xlsread('Messresultate.xlsx', 'Tabelle1', 'B25:F31');
 Motor1_900rpm = xlsread('Messresultate.xlsx', 'Tabelle1', 'B34:F38');
 
-%% Berechnungen
+%% Berechnungen Aufgabe 5
+
 % Generator: Motor 2 1800rpm
 P_Motor2_1800rpm = polyfit(Motor2_1800rpm(3:end,4), Motor2_1800rpm(3:end,5), 1);
 r2_1800rpm = -P_Motor2_1800rpm(1);
@@ -83,21 +94,31 @@ Pwelle_900M1G = 2*pi*Mwelle_900M1G.*v2hz(Motor1_900rpm(:,1));
 etaGen_900M1G = PelGen_900M1G./Pwelle_900M1G;
 
 %% Aufgabe 6
-r1_warm = mean([2.6 2.4 2.4 2.5]);
-r2_warm = mean([2.3 2.2 2.5]);
-% Berechnung der theoretischen Drehzahl
-nMi_20V = 1/c_phi1*(20-r1_warm*linspace(0,3.5,10)' - 2*ub_r1_1800rpm);
-nMi_40V = 1/c_phi1*(40-r1_warm*linspace(0,3.5,10)' - 2*ub_r1_1800rpm);
-%% Aufgabe 7
+% --> kommt nach aufgabe 7!!!
+
+%% Aufgabe 7 (Einlesen)
 % Soll Speisespannungen: 20V und 40V
 Motor1_20V = xlsread('Messresultate.xlsx', 'Tabelle2', 'B3:F9');
 Motor1_40V = xlsread('Messresultate.xlsx', 'Tabelle2', 'B12:F16');
 Motor2_20V = xlsread('Messresultate.xlsx', 'Tabelle2', 'B23:F27');
 Motor2_40V = xlsread('Messresultate.xlsx', 'Tabelle2', 'B30:F34');
 
+%% Aufgabe 6
+% Berechnung der theoretischen Drehzahl
+nMi_20V_M1G = 1/c_phi1*(20-r1_warm*Motor1_20V(:,2) - 2*ub_r1_1800rpm);
+nMi_20V_M2G = 1/c_phi1*(20-r1_warm*Motor2_20V(:,2) - 2*ub_r2_1800rpm);
+nMi_40V_M1G = 1/c_phi1*(40-r1_warm*Motor1_40V(:,2) - 2*ub_r1_1800rpm);
+nMi_40V_M2G = 1/c_phi1*(40-r1_warm*Motor2_40V(:,2) - 2*ub_r2_1800rpm);
+
+Mi_20V_M1G = c_phi1/(2*pi)*Motor1_20V(:,2);
+Mi_20V_M2G = c_phi1/(2*pi)*Motor2_20V(:,2);
+Mi_40V_M1G = c_phi1/(2*pi)*Motor1_40V(:,2);
+Mi_40V_M2G = c_phi1/(2*pi)*Motor2_40V(:,2);
+
+%% Aufgabe 7
 % Berechnung Aufgabe 7
 % Motor 1 Generator, U = 20V
-nMwelle_20V_M1G = v2rpm(Motor1_20V(:,1));
+%nMwelle_20V_M1G = v2rpm(Motor1_20V(:,1));
 PelMot_20V_M1G = Motor1_20V(:,2).*Motor1_20V(:,3);
 PelGen_20V_M1G = Motor1_20V(:,4).*Motor1_20V(:,5);
 Mwelle_20V_M1G = 0.5*c_phi1/(2*pi)*(Motor1_20V(:,4)+Motor1_20V(:,2));
@@ -105,7 +126,7 @@ Pwelle_20V_M1G = 2*pi*Mwelle_20V_M1G.*v2hz(Motor1_20V(:,1));
 etaGen_20V_M1G = PelGen_20V_M1G./Pwelle_20V_M1G;
 
 % Motor 1 Generator, U = 40V
-nMwelle_40V_M1G = v2rpm(Motor1_40V(:,1));
+%nMwelle_40V_M1G = v2rpm(Motor1_40V(:,1));
 PelMot_40V_M1G = Motor1_40V(:,2).*Motor1_40V(:,3);
 PelGen_40V_M1G = Motor1_40V(:,4).*Motor1_40V(:,5);
 Mwelle_40V_M1G = 0.5*c_phi1/(2*pi)*(Motor1_40V(:,4)+Motor1_40V(:,2));
@@ -113,7 +134,7 @@ Pwelle_40V_M1G = 2*pi*Mwelle_40V_M1G.*v2hz(Motor1_40V(:,1));
 etaGen_40V_M1G = PelGen_40V_M1G./Pwelle_40V_M1G;
 
 % Motor 2 Generator, U = 20V
-nMwelle_20V_M2G = v2rpm(Motor2_20V(:,1));
+%nMwelle_20V_M2G = v2rpm(Motor2_20V(:,1));
 PelMot_20V_M2G = Motor2_20V(:,4).*Motor2_20V(:,5);
 PelGen_20V_M2G = Motor2_20V(:,2).*Motor2_20V(:,3);
 Mwelle_20V_M2G = 0.5*c_phi1/(2*pi)*(Motor2_20V(:,2)+Motor2_20V(:,4));
@@ -121,7 +142,7 @@ Pwelle_20V_M2G = 2*pi*Mwelle_20V_M2G.*v2hz(Motor2_20V(:,1));
 etaGen_20V_M2G = PelGen_20V_M2G./Pwelle_20V_M2G;
 
 % Motor 2 Generator, U = 40V
-nMwelle_40V_M2G = v2rpm(Motor2_40V(:,1));
+%nMwelle_40V_M2G = v2rpm(Motor2_40V(:,1));
 PelMot_40V_M2G = Motor2_40V(:,4).*Motor2_40V(:,5);
 PelGen_40V_M2G = Motor2_40V(:,2).*Motor2_40V(:,3);
 Mwelle_40V_M2G = 0.5*c_phi1/(2*pi)*(Motor2_40V(:,2)+Motor2_40V(:,4));
@@ -134,7 +155,7 @@ Motor1_10Ohm= xlsread('Messresultate.xlsx', 'Tabelle3', 'B3:F8');
 Motor2_10Ohm = xlsread('Messresultate.xlsx', 'Tabelle3', 'B16:F20');
 
 % Motor 1 Generator, Rv = 10Ohm
-nMwelle_10Ohm_M1G = v2rpm(Motor1_10Ohm(:,1));
+%nMwelle_10Ohm_M1G = v2rpm(Motor1_10Ohm(:,1));
 PelMot_10Ohm_M1G = Motor1_10Ohm(:,2).*(40-Motor1_10Ohm(:,3));
 PelGen_10Ohm_M1G = Motor1_10Ohm(:,4).*Motor1_10Ohm(:,5);
 PelRes_10Ohm_M1G = Motor1_10Ohm(:,2).*Motor1_10Ohm(:,3);
@@ -143,7 +164,7 @@ Pwelle_10Ohm_M1G = 2*pi*Mwelle_10Ohm_M1G.*v2hz(Motor1_10Ohm(:,1));
 etaGen_10Ohm_M1G = PelGen_10Ohm_M1G./Pwelle_10Ohm_M1G;
 
 % Motor 2 Generator, Rv = 10Ohm
-nMwelle_10Ohm_M2G = v2rpm(Motor2_10Ohm(:,1));
+%nMwelle_10Ohm_M2G = v2rpm(Motor2_10Ohm(:,1));
 PelMot_10Ohm_M2G = Motor2_10Ohm(:,4).*(40-Motor2_10Ohm(:,5));
 PelGen_10Ohm_M2G = Motor2_10Ohm(:,2).*Motor2_10Ohm(:,3);
 PelRes_10Ohm_M2G = Motor2_10Ohm(:,4).*Motor2_10Ohm(:,5);
@@ -155,7 +176,7 @@ etaGen_10Ohm_M2G = PelGen_10Ohm_M2G./Pwelle_10Ohm_M2G;
 
 
 %% Aufgabe 10
-%(siehe aufgabe 6)
+% siehe Aufgabe 2!!
 
 %% Anzeigen der Ergebnisse
 disp(' ______   _______          _______  _______ _________ _______  _______ ')
@@ -320,6 +341,63 @@ legend('M_{Welle}', '\eta_{Welle}')
 filename = ['plots/aufgabe5-motor2-900rpm.png'];
 print('-dpng', filename);
 
+%% Darstellung Aufgabe 6 und Aufgabe 7 (Drehzahlen)
+% Motor 1 als Generator 20V und 40V
+figure
+
+subplot(1,2,1)
+% Drehzahl in Abhänigkeit von Mi (Aufgabe 6)
+plot(Mi_20V_M1G,hz2rpm(nMi_20V_M1G), 'LineWidth', 2,'LineSmoothing', 'on')
+title('Generator: Motor 1, 20V und 40V')
+xlabel('M_{i} [Nm]')
+ylabel('n [rpm]')
+hold all
+plot(Mi_40V_M1G,hz2rpm(nMi_40V_M1G), 'LineWidth', 2,'LineSmoothing', 'on')
+legend('U_{A} = 20V', 'U_{A} = 40V', 'Location', 'East')
+grid on
+
+subplot(1,2,2)
+% Drehzahl in Abhänigkeit von MWelle (Aufgabe 7)
+plot(Mwelle_20V_M1G,hz2rpm(nMi_20V_M1G), 'LineWidth', 2,'LineSmoothing', 'on')
+title('Generator: Motor 1, 20V und 40V')
+xlabel('M_{Welle} [Nm]')
+ylabel('n [rpm]')
+hold all
+plot(Mwelle_40V_M1G,hz2rpm(nMi_40V_M1G), 'LineWidth', 2,'LineSmoothing', 'on')
+legend('U_{A} = 20V', 'U_{A} = 40V', 'Location', 'East')
+grid on
+
+filename = ['plots/aufgabe6-motor1.png'];
+print('-dpng', filename);
+
+% Motor 1 als Generator 20V und 40V
+figure
+
+subplot(1,2,1)
+% Drehzahl in Abhänigkeit von Mi (Aufgabe 6)
+plot(Mi_20V_M2G,hz2rpm(nMi_20V_M2G), 'LineWidth', 2,'LineSmoothing', 'on')
+title('Generator: Motor 2, 20V und 40V')
+xlabel('M_{i} [Nm]')
+ylabel('n [rpm]')
+hold all
+plot(Mi_40V_M2G,hz2rpm(nMi_40V_M2G), 'LineWidth', 2,'LineSmoothing', 'on')
+legend('U_{A} = 20V', 'U_{A} = 40V', 'Location', 'East')
+grid on
+
+subplot(1,2,2)
+% Drehzahl in Abhänigkeit von MWelle (Aufgabe 7)
+plot(Mwelle_20V_M2G,hz2rpm(nMi_20V_M2G), 'LineWidth', 2,'LineSmoothing', 'on')
+title('Generator: Motor 2, 20V und 40V')
+xlabel('M_{Welle} [Nm]')
+ylabel('n [rpm]')
+hold all
+plot(Mwelle_40V_M2G,hz2rpm(nMi_40V_M2G), 'LineWidth', 2,'LineSmoothing', 'on')
+legend('U_{A} = 20V', 'U_{A} = 40V', 'Location', 'East')
+grid on
+
+filename = ['plots/aufgabe6-motor2.png'];
+print('-dpng', filename);
+
 %% Darstellung Aufgabe 7
 % Motor 1 als Generator 20V
 figure
@@ -450,7 +528,7 @@ filename = ['plots/aufgabe7-motor1-40V.png'];
 print('-dpng', filename);
 
 %% Darstellung Aufgabe 8
-% Motor 2 als Generator, Rv = 10Ohm
+% Motor 2 als Anreger, Rv = 10Ohm
 figure
 subplot(1,2,1)
 
@@ -485,28 +563,28 @@ filename = ['plots/aufgabe8-motor1-10Ohm.png'];
 print('-dpng', filename);
 
 
-% Motor 1 als Generator, Rv = 10Ohm
+% Motor 1 als Anreger, Rv = 10Ohm
 figure
 subplot(1,2,1)
 
 % Pelektrisch Generator
-plot(Motor2_10Ohm(:,4),PelGen_10Ohm_M2G, 'LineWidth', 2,'LineSmoothing', 'on')
+plot(Motor2_10Ohm(:,2),PelGen_10Ohm_M2G, 'LineWidth', 2,'LineSmoothing', 'on')
 title('Generator: Motor 1, mit Vorwiderstand')
 xlabel('I_{Gen} [A]')
 ylabel('P [W]')
 hold all
 grid on
 % Pelektrisch Motor
-plot(Motor2_10Ohm(:,4),PelMot_10Ohm_M2G, 'LineWidth', 2,'LineSmoothing', 'on')
+plot(Motor2_10Ohm(:,2),PelMot_10Ohm_M2G, 'LineWidth', 2,'LineSmoothing', 'on')
 % Pwelle
-plot(Motor2_10Ohm(:,4),Pwelle_10Ohm_M2G, 'LineWidth', 2,'LineSmoothing', 'on')
+plot(Motor2_10Ohm(:,2),Pwelle_10Ohm_M2G, 'LineWidth', 2,'LineSmoothing', 'on')
 % Pvorwiderstand
-plot(Motor2_10Ohm(:,4),PelRes_10Ohm_M2G, 'LineWidth', 2,'LineSmoothing', 'on')
+plot(Motor2_10Ohm(:,2),PelRes_10Ohm_M2G, 'LineWidth', 2,'LineSmoothing', 'on')
 legend('P_{el.Gen}', 'P_{el.Mot}', 'P_{Welle}', 'P_{Rvor}', 'Location', 'NorthWest')
 
 subplot(1,2,2)
 % Mwelle und etawelle
-[AX,h1,h2] = plotyy(Motor2_10Ohm(:,4),Mwelle_10Ohm_M2G, Motor2_10Ohm(:,4),etaGen_10Ohm_M2G);
+[AX,h1,h2] = plotyy(Motor2_10Ohm(:,2),Mwelle_10Ohm_M2G, Motor2_10Ohm(:,2),etaGen_10Ohm_M2G);
 title('Moment und Wirkungsgrad');
 set(h1,'LineWidth', 2,'LineSmoothing', 'on');
 set(h2,'LineWidth', 2,'LineSmoothing', 'on');
@@ -518,3 +596,10 @@ legend('M_{Welle}', '\eta_{Welle}')
 
 filename = ['plots/aufgabe8-motor2-10Ohm.png'];
 print('-dpng', filename);
+
+%% Darstellung Aufgabe 9
+% Motor 1 als Generator, 40V und beim höchsten Strom:
+
+disp('Berechnung Summe Eisen- und mechanische Verluste')
+PEisenMech_Summe = (1-etaGen_40V_M1G(end))*PelMot_40V_M1G(end);
+disp(['P_e+m = ' num2str(PEisenMech_Summe) ' W']);
