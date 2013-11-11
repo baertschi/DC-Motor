@@ -99,7 +99,12 @@ Die Aufgabenstellung ist unter \url{http://moodle.bfh.ch/} oder in \autoref{sec:
 \section{Durchführung}
 Hier werden nun die einzelnen Aufgaben separat und mit jeweils eigener abschliessender Diskussion behandelt. Im Folgenden wird der linke Motor auf dem Messaufbau \emph{Motor 1} und der rechte Motor \emph{Motor 2} genannt.
 
-<abbildung>
+\begin{figure}[ht]
+	\centering
+		\includegraphics[width=1\textwidth]{images/AufbauModell.jpg}
+	\caption{Aufbau Modell}
+	\label{fig:AufbauModell}
+\end{figure}
 
 \subsection{Aufgabe 1}
 Das Schema für die Aufgabe 4 ist in \autoref{fig:schema4} zusehen, das Schema für die Aufgaben 5, 7 und 8 in \autoref{fig:schema578}.
@@ -177,8 +182,19 @@ Es wurden jeweils mindestens fünf Datenpunkte aufgenommen und währenddessen die 
 
 \subsubsection{Resultate und Diskussion}
 %Die Resultate können in \autoref{}, \autoref{}, \autoref{} und \autoref{}betrachtet werden.
-<abbildung>
+\begin{figure}[ht]
+	\subfigure[n = 900rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor1-900rpm.png}}\hfill
+	\subfigure[n = 1800rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor1-1800rpm.png}}
+	\caption{Motor 1}
+	\label{fig:A5_M1_900rpm}
+\end{figure}
 
+\begin{figure}[ht]
+	\subfigure[n = 900rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor2-900rpm.png}}\hfill
+	\subfigure[n = 1800rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor2-1800rpm.png}}
+	\caption{Motor 2}
+	\label{fig:A5_M2_900rpm}
+\end{figure}
 \subsection{Aufgabe 6}
 Für die Berechnung von $n$ in Abhängigkeit des inneren Momentes wurde Gleichung \ref{eq:n-mi} verwendet:
 
