@@ -144,7 +144,12 @@ Den Rotor mussten wird in verschiedene Stellungen positionieren, weil teilweise 
 Der Vergleich mit den berechneten Widerstandswerten von Aufgabe 5 (siehe \autoref{sec:aufgabe5}) ist dort zu finden.
 
 \subsection{Aufgabe 4}
-Die Messung von $c\cdot\Phi$ wird folgendermassen gemacht: Der eine Motor wird mit einer Spannung von 10V gespiesen und dadurch der Rotor des zweiten Motors in Drehung versetzt. Wird dieser zweite Motor nun nicht belastet (also ist dort $I_A = 0A$), fällt keine Spannung über $R_A$ ab und es entsteht auch keine Bürstenspannung. Deshalb kann beim zweiten Motor in diesem Fall beim Spannungsabgriff direkt $U_q$ gemessen werden. Die Messung basiert auf dem Schema in \autoref{fig:schema4}.
+Die Messung von $c\cdot\Phi$ wird folgendermassen gemacht: Der eine Motor wird mit einer Spannung von 10V gespiesen und dadurch der Rotor des zweiten Motors in Drehung versetzt. Wird dieser zweite Motor nun nicht belastet (also ist dort $I_A = 0A$), fällt keine Spannung über $R_A$ ab und es entsteht auch keine Bürstenspannung. Deshalb kann beim zweiten Motor in diesem Fall beim Spannungsabgriff direkt $U_q$ gemessen werden. In der Formel \ref{eq:cphi} wird daher um das $c\cdot\Phi$ zu berechnen $U_q = U_A$ bzw. $U_2$ eingesetzt. Die Messung von $U_2$ basiert auf dem Schema in \autoref{fig:schema4}. 
+
+\begin{equation}
+c\cdot\Phi = \frac{U_q}{n}
+\label{eq:cphi}
+\end{equation}
 
 \subsubsection{Drehzahlmessung}
 Die Drehzahl wird immer als Spannung $U_n$ mit folgender Proportion ausgegeben: 14.3V / 1000rpm. Die Drehfrequenz $n$ wurde im ganzen Laborversuch nach Gleichung \ref{eq:v2hz} aus dieser Spannung berechnet.
@@ -181,20 +186,15 @@ Diese Messung basiert auf dem Schema in \autoref{fig:schema578}. Insgesamt wurde
 Es wurden jeweils mindestens fünf Datenpunkte aufgenommen und währenddessen die Drehzahl möglich konstant (auf $1800rpm$ bzw. $900rpm$) gehalten.
 
 \subsubsection{Resultate und Diskussion}
-Die Resultate können in \autoref{fig:A5-M1} und \autoref{fig:A5-M2} betrachtet werden.
+Die Resultate können in \autoref{fig:A5} betrachtet werden.
 
 \begin{figure}[ht!]
-	\subfigure[n = 900rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor1-900rpm.png}}\hfill
-	\subfigure[n = 1800rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor1-1800rpm.png}}
-	\caption{Motor 1}
-	\label{fig:A5-M1}
-\end{figure}
-
-\begin{figure}[ht!]
-	\subfigure[n = 900rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor2-900rpm.png}}\hfill
-	\subfigure[n = 1800rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor2-1800rpm.png}}
-	\caption{Motor 2}
-	\label{fig:A5-M2}
+	\subfigure[Motor 1, n = 900rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor1-900rpm.png}}\hfill
+	\subfigure[Motor 1, n = 1800rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor1-1800rpm.png}}
+	\subfigure[Motor 2, n = 900rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor2-900rpm.png}}\hfill
+	\subfigure[Motor 2, n = 1800rpm]{\includegraphics[width=0.49\textwidth]{../plots/aufgabe5-motor2-1800rpm.png}}
+	\caption{Leistung und Drehmoment in Abhängigkeit von $I_A$, $n = fix$}
+	\label{fig:A5}
 \end{figure}
 
 Die Kurvenformen gleichen sehr denen in Aufgabe 7 (siehe \autoref{sec:aufgabe7}), nur das die Leistungsaufnahme etwas gekrümmt ist. Dafür ist die Gerade, welche die Wellenleistung darstellt, linear. Dies, weil sie proportional zur Drehzahl auf der Welle ist. Der Wirkungsgrad wird auch hier von kleineren zu grösseren Leistungen (also von kleinerem zu grösserem Drehmoment), besser.
@@ -391,7 +391,7 @@ Im Praktikum hatten wir relativ wenig Zeit für die Messungen, weshalb wir jeweil
 \end{itemize}
 
 \section{Matlab Code}
-\includepdf{Matlab-Skript.pdf}
+\includepdf{DC-MotorCode.pdf}
 
 \section{Aufgabenstellung Praktikum}
 \label{sec:aufgabe}

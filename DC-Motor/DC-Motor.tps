@@ -24,15 +24,15 @@ Class=CLatexEdit
 Document=DC-Motor.tex
 
 [Frame0_Row0]
-cyCur=565
+cyCur=521
 cyMin=10
 
 [Frame0_Col0]
-cxCur=1543
+cxCur=1693
 cxMin=10
 
 [Frame0_View0,0]
-Cursor.row=202
-Cursor.column=0
-TopSubLine=187
+Cursor.row=393
+Cursor.column=24
+TopSubLine=399
 
